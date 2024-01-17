@@ -1,0 +1,12 @@
+package day0112;
+
+public class MainEmp_04 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Manager_04 manager = new Manager_04("이효리",22222,"경영기획부");
+		
+		manager.getEmployee();
+	}
+
+}

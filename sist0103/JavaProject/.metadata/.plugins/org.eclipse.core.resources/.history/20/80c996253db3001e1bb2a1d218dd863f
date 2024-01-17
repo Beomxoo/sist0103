@@ -1,0 +1,14 @@
+package day0115;
+
+class ClassA{
+	
+}
+//////////////////////////////////////////
+public class InheritReview_01 { // 전역변수 -> 자동초기화됨  지역변수 -> 초기화해야함
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,73 @@
+package day0112;
+
+//추상부모클래스
+abstract class Board {
+	public abstract void play();
+
+}
+
+/////////////////////////////////////////
+class Insert extends Board {
+
+	@Override
+	public void play() {
+		// TODO Auto-generated method stub
+		System.out.println("입력합니다");
+	}
+
+}
+
+/////////////////////////////////////////
+class Select extends Board {
+
+	@Override
+	public void play() {
+		// TODO Auto-generated method stub
+		System.out.println("선택합니다");
+	}
+
+}
+
+/////////////////////////////////////////
+class Update extends Board {
+
+	@Override
+	public void play() {
+		// TODO Auto-generated method stub
+		System.out.println("업데이트 합니다");
+	}
+
+}
+
+//////////////////////////////////
+class Delete extends Board {
+
+	@Override
+	public void play() {
+		// TODO Auto-generated method stub
+		System.out.println("삭제합니다");
+	}
+
+}
+
+//////////////////////////////////////////////
+public class Abstract_12 {
+
+	public static void main(String[] args) {
+		//다형성으로 생성메서드 출력
+		Board board = null;
+		board = new Insert();
+		board.play();
+		
+		board =new Select();
+		board.play();
+		
+		board = new Update();
+		board.play();
+		
+		board = new Delete();
+		board.play();
+
+	}
+
+}

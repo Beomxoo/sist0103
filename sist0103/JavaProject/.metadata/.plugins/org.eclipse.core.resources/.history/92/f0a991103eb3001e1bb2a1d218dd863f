@@ -1,0 +1,23 @@
+package day0115;
+
+interface InterAA{//상수와 추상메서드만.
+	public void play();
+}
+//////////////////////////////////////////
+interface InterBB extends InterAA{//상수와 추상메서드만.
+	public void draw();
+}
+//////////////////////////////////////////
+class ImterImple implements InterBB{ // 추상메서드 무조건 오버라이드 
+	
+}
+
+//////////////////////////////////////////
+public class InheritReview_01 { // 전역변수 -> 자동초기화됨  지역변수 -> 초기화해야함
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
