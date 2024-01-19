@@ -26,8 +26,6 @@ public class QuizSwing_10 extends JFrame implements ActionListener {
 		cp = this.getContentPane();
 		this.setBounds(300, 100, 700, 300);
 		cp.setBackground(new Color(255, 204, 204));
-		cp.setLayout(null);
-		cp.add(lblstr);
 		initDesign();
 		this.setVisible(true);
 		
@@ -35,7 +33,7 @@ public class QuizSwing_10 extends JFrame implements ActionListener {
 
 	public void initDesign() {
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
+		panel.setBackground(Color.CYAN);
 		this.add(panel, BorderLayout.NORTH);
 
 		for (int i = 0; i < btn.length; i++) {
@@ -45,11 +43,15 @@ public class QuizSwing_10 extends JFrame implements ActionListener {
 			panel.add(btn[i]);
 		}
 
-		this.setLayout(null);
+		
+		
 		lblstr = new JLabel("안녕하세요.");
-		lblstr.setBounds(200, 100, 100, 100);
+		lblstr.setBounds(100, 100, 100,100);
 		lblstr.setFont(new FontUIResource("", Font.BOLD, 25));
+		lblstr.setBackground(Color.PINK);
+		lblstr.setHorizontalAlignment(JLabel.CENTER);
 		lblstr.setOpaque(true);
+		this.add(lblstr);
 
 	}
 
@@ -59,7 +61,7 @@ public class QuizSwing_10 extends JFrame implements ActionListener {
 		Object ob = e.getSource();
 		for (int i = 0; i < btn.length; i++) {
 			if (ob == btn[i]) {
-				lblstr.setBackground(btnColor[i]);
+				lblstr.setForeground(btnColor[i]);
 			}
 		}
 	}
