@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;day0124.flame_01.java&apos; to &apos;Flame_01.java&apos;&#x0D;&#x0A;- Original project: &apos;SistJava&apos;&#x0D;&#x0A;- Original element: &apos;day0124.flame_01.java&apos;&#x0D;&#x0A;- Renamed element: &apos;day0124.Flame_01.java&apos;" description="Rename compilation unit &apos;flame_01.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;day0124{flame_01.java" name="Flame_01.java" references="false" stamp="1706083957079" version="1.0"/>
+</session>
