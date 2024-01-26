@@ -157,7 +157,7 @@ public class ConnectTest {
 		Statement stmt = null;
 		ResultSet rs = null;
 
-		String sql = "select order_num,f.fno, order_name, food_name, price, food_shopname , shop_loc, order_addr from foodshop f, jumun j where f.fno = j.fno order by order_name";
+		String sql = "select order_num,f.fno, order_name, food_name, to_char(price,'L999,999,999') price, food_shopname , shop_loc, order_addr from foodshop f, jumun j where f.fno = j.fno order by order_name";
 
 		try {
 			conn = DriverManager.getConnection(URL, "teacher", "a1234");
@@ -175,15 +175,14 @@ public class ConnectTest {
 				int fno = rs.getInt("fno");
 				String order_name = rs.getString("order_name");
 				String food_name = rs.getString("food_name");
-				int price = rs.getInt("price");
+				String price = rs.getString("price");
 				String food_shopname = rs.getString("food_shopname");
 				String shop_loc = rs.getString("shop_loc");
 				String order_addr = rs.getString("order_addr");
 
-				DecimalFormat df = new DecimalFormat("###,###");
-
+			
 				System.out.println(order_num + "\t" + fno + "\t" + order_name + "\t" + food_name + "\t"
-						+ df.format(price) + "원\t" + food_shopname + "\t" + shop_loc + "\t" + order_addr);
+						+ price + "\t" + food_shopname + "\t" + shop_loc + "\t" + order_addr);
 
 			}
 
