@@ -39,7 +39,7 @@ public class Ramyen extends JFrame implements ActionListener {
 	Container cp;
 	JPanel topPanel, centerPanel, bottomPanel;
 	JButton[] topBtn = new JButton[4];
-	String[] btnStr = { "라면", "토핑", "음료수", "원산지"};
+	String[] btnStr = { "라면", "반찬", "음료수", "원산지"};
 	JButton[] bottomBtn = new JButton[4];
 	String[] bottomStr = { "결제할금액", "담은메뉴", "전체취소", "결제하기" };
 
