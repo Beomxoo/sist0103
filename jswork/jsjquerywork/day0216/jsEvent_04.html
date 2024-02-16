@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #photo_zone {
+            position: absolute;
+            left: 50px;
+            top: 100px;
+            width: 380px;
+            height: 550px;
+            border: 2px solid gray;
+            padding: 10px 10px;
+        }
+
+        #main_zone {
+            position: absolute;
+            left: 500px;
+            top: 100px;
+
+        }
+
+        #large_photo {
+            width: 450px;
+            height: 500px;
+            border: 10px groove gray;
+        }
+        .sphoto{
+            width: 60px;
+            height: 60px;
+            border: 1px solid gray;
+            margin: 5px 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="photo_zone">
+        <script>
+            for (var i = 1; i <= 35; i++) {
+                
+                if(i==23){
+                    continue;
+                }
+               document.write("<img src='../image/쇼핑몰사진/쇼핑몰사진/" + i + ".jpg' class=sphoto>");
+
+            }
+        </script>
+    </div>
+    <div id="main_zone">
+        <img src="../image/logoImg/logoImg/toy01.png" id="large_photo">
+    </div>
+    <script>
+        //작은이미지에 마우스올리면 큰이미지에 나타나기
+        var imga= document.querySelectorAll(".sphoto");
+        for(var s of imga){
+
+            var mz = document.getElementById("large_photo");
+            s.onmouseover=function(){
+                imgpath= this.getAttribute("src");
+                
+                mz.setAttribute("src", imgpath);
+            }
+
+            s.onmouseout=function(){
+                mz.setAttribute("src", "../image/logoImg/logoImg/toy01.png");
+            }
+        }
+            
+        
+    </script>
+</body>
+
+</html>
