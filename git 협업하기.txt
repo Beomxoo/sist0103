@@ -1,0 +1,18 @@
+git branch angel            [angel브랜치 만들기]
+git checkout angel         [angel 브랜치로 이동]
+
+git add .
+git commit -m '커밋메시지'
+git push origin angel           [(master X)]
+
+git checkout master          [master 브랜치로 이동 switch도 가능]
+
+
+master로 이동 후
+git merge angel             [합치기]
+git push origin master     [합친거 master로 보내기]
+
+
+
+
+git branch angel -d     [angel브랜치 삭제하기]

@@ -1,0 +1,17 @@
+Container cp;
+	
+	public SwingStart(String title) {
+		super(title);
+		cp = this.getContentPane();
+		this.setBounds(300, 100, 700, 300);
+		cp.setBackground(new Color(255,204,204));
+		this.setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		new SwingStart("스윙 시작");
+
+	}
+
+C:\Oracle or ORACLE_BASE C:\Program Files\Oracle C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Oracle - OraDB19Home1 C:\Users Oracle-related folders.
+출처: https://suyou.tistory.com/302 [수유산장:티스토리]
