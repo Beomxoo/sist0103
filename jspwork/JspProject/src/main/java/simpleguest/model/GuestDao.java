@@ -145,6 +145,7 @@ public class GuestDao {
 			pstmt.setString(3, dto.getImage());
 			pstmt.setString(4, dto.getNum());
 			
+			pstmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
