@@ -15,4 +15,4 @@ git push origin master     [합친거 master로 보내기]
 
 
 
-git branch angel -d     [angel브랜치 삭제하기]
+git branch -d angel [angel브랜치 삭제하기]
