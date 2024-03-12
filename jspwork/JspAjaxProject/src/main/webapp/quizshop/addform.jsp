@@ -20,7 +20,7 @@
 </head>
 <body>
 <div style="margin: 50px 100px; width: 400px;">
-	<form action="">
+	<form action="addaction.jsp" method="post">
 		<table class="table table-bordered">
 				<caption align="top"><b>상품등록</b></caption>
 				<tr>
@@ -64,7 +64,7 @@
 				<tr>
 					<td colspan="2" align="center">
 						<button type="submit" class="btn btn-outline-info">상품등록</button>
-						<button type="button" class="btn btn-outline-success" onclick="">상품목록</button>
+						<button type="button" class="btn btn-outline-success" onclick="location.href='shoplist.jsp'">상품목록</button>
 					</td>
 				</tr>
 			</table>

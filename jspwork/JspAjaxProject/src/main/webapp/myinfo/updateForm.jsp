@@ -108,6 +108,7 @@
                 <input type="submit" value="수정" class="btn btn-outline-warning">
                 <input type="button" value="목록" class="btn btn-outline-success"
                 onclick="location.href='infoList.jsp'">
+                
               </td>
             </tr>
       </table>
