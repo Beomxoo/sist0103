@@ -145,7 +145,7 @@ div.detail button{
 		
 		$(document).on("click", ".btnupdate", function(){
     		var num=$(this).attr("num");
-	  		$("#unum").val(num);
+	  		//$("#unum").val(num);
 	  		
 	  		$.ajax({
 	  		type:"get",
@@ -169,21 +169,20 @@ div.detail button{
 		});
 		
 		//수정폼 저장
-	  $("#ubtnadd").click(function(){
-		  var writer=$("#uwriter").val();
-		  var subject=$("#usubject").val();
-		  var content=$("#ucontent").val();
-		  var avata=$("#uavata").val();
+	  $("#dbupdate").click(function(){
+		  var data=$("#updatefrm").serialize();
+		  
+		  //alert(data);
 		  
 		 //console.log(writer,subject,avata,content);
-		 var s="writer=" + writer + "&subject=" + subject + "&content=" + content + "&avata=" + avata;
+		 //var s="writer=" + writer + "&subject=" + subject + "&content=" + content + "&avata=" + avata;
 		
 		 
 		 $.ajax({
 			   type:"post",
 			   dataType:"html",
 			   url:"updateBoard.jsp",
-			   data:s,
+			   data:data,
 			   success:function(){
 				   
 				   //alert("성공");
@@ -193,7 +192,7 @@ div.detail button{
 				  $("div.updateform").hide();
 				  $("div.list").show();
 			   }
-		   })
+		   }) 
 		   
 	  });
 	  
@@ -304,15 +303,16 @@ div.detail button{
    </form>
 </div>
 
+<!-- 수정폼 -->
 <div class="updateform" style="width: 400px;">
-   <form action="#" id="updateform">
+   <form id="updatefrm">
      <table class="table table-bordered">
         <caption align="top"><b>게시글 수정</b></caption>
         <input type="hidden" id="unum" name="unum" value="">
         <tr>
           <th class="table-primary">작성자</th>
           <td>
-            <input type="text" id="uwriter" style="width: 120px;"
+            <input type="text" id="uwriter" name="uwriter" style="width: 120px;"
             class="form-control">
           </td>
         </tr>
@@ -320,7 +320,7 @@ div.detail button{
         <tr>
           <th class="table-primary">제목</th>
           <td>
-            <input type="text" id="usubject" style="width: 270px;"
+            <input type="text" id="usubject"  name="usubject" style="width: 270px;"
             class="form-control">
           </td>
         </tr>
@@ -328,7 +328,7 @@ div.detail button{
         <tr>
           <th class="table-primary">아바타</th>
           <td>
-            <select id="uavata" class="form-control" style="width: 100px;">
+            <select id="uavata" name="uavata" class="form-control" style="width: 100px;">
                <option value="../image/avata/b1.png">사랑해</option>
                <option value="../image/avata/b8.png">최고</option>
                <option value="../image/avata/b7.png">신남</option>
@@ -341,14 +341,14 @@ div.detail button{
         <tr>
           <td colspan="2">
             <textarea style="width: 380px; height: 100px;" id="ucontent"
-            class="form-control"></textarea>
+             name="ucontent" class="form-control"></textarea>
           </td>
         </tr>
         
         <tr>
           <td colspan="2" align="center">
-            <button type="button" class="btn btn-danger"
-            id="ubtnadd">수정하기</button>
+            <button type="button" class="btn btn-warning"
+            id="dbupdate">수정하기</button>
           </td>
         </tr>
      </table>
