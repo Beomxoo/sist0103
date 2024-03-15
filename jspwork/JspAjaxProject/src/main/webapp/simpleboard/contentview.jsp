@@ -23,6 +23,18 @@
 		font-size: 0.8em;
 	}
 </style>
+<script type="text/javascript">
+	$(function(){
+		
+		//ajax insert
+		var num=$("#num").val();
+		//alert(num);
+		$.ajax({
+			type: "get",
+			dataType: ""
+		});
+	});
+</script>
 <body>
 <%
 	String num=request.getParameter("num");
@@ -34,6 +46,8 @@
 	//날짜
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 %>
+
+
 <div style="margin: 50px 100px; width: 500px;">
 	<table class="table table-bordered">
 		<caption align="top"><b style="font-size: 19pt;"><%=dto.getSubject() %></b></caption>
@@ -49,6 +63,22 @@
 				<%=dto.getContent().replace("\n", "<br>") %>
 			</td>
 		</tr>
+		
+		<!-- 댓글 -->
+		<tr>
+			<td>
+				<b class="acount">댓글<span>0</span></b>
+				<div class="alist">
+					댓글목록
+				</div>
+				<div class="aform input-group">
+					<input type="text" id="nickname" class="form-control" style="width: 80px;" placeholder="닉네임">
+					<input type="text" id="content" class="form-control" style="width: 300px; margin-left: 10px;" placeholder="댓글메세지">
+					<button type="button" id="btnsend" class="btn btn-info btn-sm" style="margin-left: 10px;">저장</button>
+				</div>
+			</td>
+		</tr>
+		
 		<tr>
 			<td align="center">
 				<button type="button" class="btn btn-outline-info" onclick="location.href='addform.jsp'"><i class="bi bi-pencil-fill"></i>글쓰기</button>
