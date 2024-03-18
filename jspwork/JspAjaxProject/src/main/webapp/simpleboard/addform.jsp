@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&family=Single+Day&family=Stylish&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dongle&family=Gaegu&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <title>Insert title here</title>
 </head>
@@ -29,7 +29,7 @@
            </td>
          </tr>
          
-       	 <tr>
+         <tr>
            <th width="100" class="table-info">비밀번호</th>
            <td>
              <input type="text" name="pass" class="form-control"
@@ -46,13 +46,16 @@
          
          <tr>
            <td colspan="2" align="center">
-             <!-- type이 image submit일경우 기본기능이 submit -->
-             <input type="image" src="../image/logoImg/logoImg/submit.png" style="width: 80px;"> 
-             <input type="image" src="../image/logoImg/logoImg/list.png" style="width: 50px;" onclick="location.href='boardlist.jsp'"> 
+           <!-- type이 image submit일경우 기본기능이  submit-->
+             <input type="image" src="../image/logoImg/logoImg/submit.png" style="width: 80px;">
+             <input type="image" src="../image/logoImg/logoImg/list.png" style="width: 50px;" onclick="location.href='boardlist.jsp'">
            </td>
          </tr>
-      </table>  
+      </table>
+    
     </form>
+    
+    
 </div>
 </body>
 </html>

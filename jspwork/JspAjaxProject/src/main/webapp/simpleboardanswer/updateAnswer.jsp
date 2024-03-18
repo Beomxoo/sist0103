@@ -4,5 +4,5 @@
 <jsp:useBean id="dto" class="simpleboardanswer.model.SimpleAnswerDto"/>
 <jsp:setProperty property="*" name="dto"/>
 <%
-   dao.insertAnswer(dto);
+	dao.updateSimpleAnswer(dto);
 %>
