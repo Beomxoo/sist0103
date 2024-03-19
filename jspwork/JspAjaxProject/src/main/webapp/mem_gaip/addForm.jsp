@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
   function openId(){
-	  window.open("idSearch.jsp","idcheck","left='100px',top='100px',width='400px',height='200px'")
+	  window.open("idSearch.jsp","idcheck","left=300,top=100,width=400,height=200")
   }
 
   $(function(){

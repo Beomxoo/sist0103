@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
    function saveId(id){
-	   alert(id);
+	   //alert(id);
 	   //부모창:opener
 	   opener.mfrm.m_id.value=id;
 	   
