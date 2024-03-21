@@ -12,18 +12,18 @@
 <title>Insert title here</title>
 </head>
 <%	
-	request.setCharacterEncoding("utf-8");
 	String id=request.getParameter("id");
-	
 	MemberDao dao=new MemberDao();
-	MemberDto dto=dao.getName(id);
+	String name=dao.getName(id);
 	
 %>
 <body>
-<h3>가입성공화면</h3><br><br>
-<h5><%=dto.getName()%>님의 가입을 환영합니다.</h5><br><br>
-<input type="button" value="로그인" class="btn btn-info"> 
-<input type="button" value="메인화면" class="btn btn-success"> 
-
+<div style="margin: 100px 250px;">
+	<img alt="" src="image2/flower_ani/s6.JPG">
+	<b><%=name %>님의 회원가입을 축하합니다</b>
+	<br><br>
+	<button type="button" class="btn btn-info" onclick="location.href='index.jsp?main=login/loginmain.jsp'">로그인</button>
+	<button type="button" class="btn btn-success" onclick="location.href='index.jsp?main=member/mypage.jsp'">마이페이지</button>
+</div>
 </body>
 </html>
