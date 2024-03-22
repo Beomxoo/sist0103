@@ -40,29 +40,35 @@
 		})
 		
 	}
-	
-
 </script>
+
 </head>
 <%
 	MemberDao dao=new MemberDao();
 	List<MemberDto> list=dao.getAllMembers();
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	
+	//로그인 세션얻기
+	String loginok=(String)session.getAttribute("loginok");
+	//아이디 얻기
+	String myid=(String)session.getAttribute("myid");
+	
 %>
 <body>
-	<div style="margin: 100px 100px; width: 800px;">
+	<div style="margin: 200px 100px; width: 800px;">
 		<table class="table table-bordered">
 		<%
 			for(MemberDto dto:list)
-			{%>
+			{
+				if(loginok!=null && myid.equals(dto.getId())){
+			%>
 			<tr>
 				<td rowspan="6" align="center" valign="middle" style="width: 200px;">
 				<img src="image/shopimg.png" id="mainimg">
 				</td>
 				<td style="width: 300px;">회원명: <%=dto.getName() %></td>
 				<td rowspan="5" style="width: 150px;" align="center" valign="middle">
-					<button type="button" class="btn btn-info">수정</button>
+					<button type="button" class="btn btn-info" onclick="location.href='index.jsp?main=member/updatepassform.jsp?num=<%=dto.getNum() %>'">수정</button>
 					<button type="button" class="btn btn-danger" onclick="delfunc('<%=dto.getNum() %>')">탈퇴</button>
 				</td>
 			</tr>
@@ -83,6 +89,7 @@
 			</tr>
 			<%}
 		 %>
+		 <%}%>
 		</table>
 	</div>
 <!-- The Modal -->

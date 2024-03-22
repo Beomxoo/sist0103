@@ -66,7 +66,7 @@
   if(request.getParameter("main")!=null)
   {	  
 	  
-	  mainPage=request.getParameter("main");
+	  mainPage=request.getParameter("main");  
   }
 %>
 <body>

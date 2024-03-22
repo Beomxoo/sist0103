@@ -15,29 +15,23 @@
 	String num=request.getParameter("num");
 	String pass=request.getParameter("pass");
 	
-	//dao
 	MemberDao dao=new MemberDao();
-	
-	//비번체크해서 맞으면 삭제
 	boolean b=dao.isEqualPass(num, pass);
-	if(b){
-		dao.deleteMember(num);
-		
-		//세션삭제
-		session.removeAttribute("loginok");
-		session.removeAttribute("myid");
-		session.removeAttribute("saveok");
-		%>
+	
+	System.out.print(num);
+	System.out.print(pass);
+	System.out.print(b);
+	
+	if(b)
+	{
+		response.sendRedirect("../index.jsp?main=member/updateform.jsp?num="+ num);    //redirect는 실제경로 넣기 
+	} else{%>
 		<script type="text/javascript">
-			alert("회원탈퇴성공!!!");
-			location.href="../index.jsp";
-		</script>
-	<%} else{%>
-		<script type="text/javascript">
-			alert("비밀번호가 틀렸습니다");
-			history.back();
+		alert("비밀번호가 틀렸어요");
+		history.back();
 		</script>
 	<%}
+			
 %>
 </body>
 </html>
