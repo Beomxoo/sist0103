@@ -1,3 +1,5 @@
+<%@page import="data.dto.SmartDto"%>
+<%@page import="data.dao.SmartDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,6 +14,15 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <%
+	String num = request.getParameter("num");
+	String currentPage = request.getParameter("currentPage");
+	  
+	SmartDao dao = new SmartDao();
+	SmartDto dto=dao.getData(num);
+	
+
+%>
+<%
 	//프로젝트의 경로
 	String root=request.getContextPath();
 %>
@@ -25,6 +36,9 @@
 <body>
 
 <form action="smartboard/smartaction.jsp" method="post">
+
+	<input type="hidden" name="num" value="<%=num %>">
+	<input type="hidden" name="currentPage" value="<%=currentPage %>">
 	<table style="width: 800px;margin-left: 100px;" class="table table-bordered">
 		<caption align="top"><b>스마트게시판</b></caption>
 		
@@ -32,14 +46,14 @@
 		  <th width="100" class="table-light">작성자</th>
 		  <td>
 		    <input type="text" name="writer" class="form-control"
-		    required="required" style="width: 130px;">
+		    required="required" style="width: 130px;" value="<%=dto.getWriter() %>">
 		  </td>
 		</tr>
 		<tr>
 		  <th width="100" class="table-light">제목</th>
 		  <td>
 		    <input type="text" name="subject" class="form-control"
-		    required="required" style="width: 500px;">
+		    required="required" style="width: 500px;" value="<%=dto.getSubject() %>">
 		  </td>
 		</tr>
 		
@@ -47,7 +61,7 @@
 			<td colspan="2">
 				<textarea name="content" id="content"		
 					required="required"			
-					style="width: 100%;height: 300px;display: none;"></textarea>		
+					style="width: 100%;height: 300px;display: none;"><%=dto.getContent() %></textarea>		
 			
 			</td>
 		</tr>
