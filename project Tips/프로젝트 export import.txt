@@ -1,0 +1,6 @@
+프로젝트 -> 우클릭 -> export -> war파일 ->    Browse..부분에서 어디로 내보낼지 설정
+반드시 할때 Export source files  체크
+
+삭제할때는 프로젝트 우클릭 delete > 체크박스 1번째꺼 체크하고 삭제하기
+
+파일 받아올때는 우클릭 > import -> war 위치 넣기 -> 체크 나머지안하고 그냥 바로 finish

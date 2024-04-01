@@ -1,3 +1,4 @@
+<%@page import="data.dao.SmartAnswerDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="data.dto.SmartDto"%>
 <%@page import="java.util.List"%>
@@ -120,7 +121,14 @@ List<SmartDto>list=dao.getList(startNum, perPage);
 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 //int count=list.size();
 
-
+//댓글개수넣기
+SmartAnswerDao adao=new SmartAnswerDao();
+for(SmartDto dto:list)
+{
+	//댓글변수에 댓글 총 갯수넣기
+	int acount=adao.getAnswerList(dto.getNum()).size();
+	dto.setAnswercount(acount);
+}
 
 %>
 
@@ -144,8 +152,8 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
         	<tr>
         	  <td colspan="4" align="center">
         	    <h6><b>등록된 게시글이 없습니다</b></h6>
-        	  </td>
-        	</tr>
+        	  </td> 
+        	</tr>  
         <%}else{
         	for(SmartDto dto:list)
         	{%>
@@ -153,8 +161,19 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
         		  <td align="center">
         		  <input type="checkbox" value="<%=dto.getNum()%>" class="alldel">&nbsp;&nbsp;
         		  <%=no-- %></td>
-        		  <td><a href="index.jsp?main=smartboard/contentview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>">
-        		  <span style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 250px; display: block;"><%=dto.getSubject() %></span></a></td>
+        		  <td>
+        		 
+        		  <a href="index.jsp?main=smartboard/contentview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>">
+        		  <%=dto.getSubject() %></a>
+        		  <%
+        		  	if(dto.getAnswercount()>0)
+        		  	{%>
+        		  		 <a href="index.jsp?main=smartboard/contentview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>" style="color: red;">[<%=dto.getAnswercount() %>]</a>
+        		  	 <%}
+        		  
+        		  %>
+        		  
+        		  </td>
         		  <td align="center"><%=dto.getWriter() %></td>
         		  <td align="center"><%=sdf.format(dto.getWriteday()) %></td>
         		  <td align="center"><%=dto.getReadcount() %></td>

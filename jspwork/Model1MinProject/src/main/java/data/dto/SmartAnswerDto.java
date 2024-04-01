@@ -3,6 +3,7 @@ package data.dto;
 import java.sql.Timestamp;
 
 public class SmartAnswerDto {
+
 	private String idx;
 	private String num;
 	private String nickname;
@@ -39,5 +40,6 @@ public class SmartAnswerDto {
 	public void setWriteday(Timestamp writeday) {
 		this.writeday = writeday;
 	}
+	
 	
 }
