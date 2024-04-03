@@ -100,8 +100,6 @@ public class MemberDao {
 		}finally {
 			db.dbClose(rs, pstmt, conn);
 		}
-		
-		
 		return name;
 	}
 	

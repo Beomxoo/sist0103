@@ -178,9 +178,28 @@ public class ShopDao {
 		}finally {
 			db.dbClose(rs, pstmt, conn);
 		}
-		
-		
 		return list;
 	}
+	
+	//삭제
+	public void deleteCart(String idx)
+	{
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		
+		String sql="delete form cart where idx=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, idx);
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
+	
 	
 }
