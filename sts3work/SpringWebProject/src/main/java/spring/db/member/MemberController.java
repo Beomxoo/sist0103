@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/member")
@@ -57,6 +60,41 @@ public class MemberController {
 	public String insert(@ModelAttribute MemberDto dto)
 	{
 		memInter.insertMember(dto);
+		return "redirect:list";
+	}
+	@GetMapping("/updateform")
+	public ModelAndView uform(@RequestParam String num)
+	{
+		ModelAndView model=new ModelAndView();
+		
+		MemberDto dto=memInter.getMember(num);
+		//dto를 request에 저장
+		model.addObject("dto", dto);
+		//포워드
+		model.setViewName("member/updateform");
+		
+		return model;
+	}
+	
+	@PostMapping("/update")
+	public String update(@ModelAttribute MemberDto dto)
+	{
+		//비밀번호 체크
+		int n=memInter.passCheck(dto.getNum(), dto.getPass());
+		
+		if(n==1) {
+			//비번이 맞으면 수정후 목록
+			memInter.updateMember(dto);
+			return "redirect:list";
+		} else {
+			return "member/passfail";
+		}
+	}
+	
+	@GetMapping("/delete")
+	public String delete(@RequestParam String num)
+	{
+		memInter.deleteMember(num);
 		return "redirect:list";
 	}
 	

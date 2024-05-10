@@ -13,10 +13,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div style="margin: 100px 100px;">
-		<button type="button" class="btn btn-info" onclick="location.href='member/list'">회원명단</button>
-		<br><br>
-		<button type="button" class="btn btn-info" onclick="location.href='board/list'">파일업로드게시판</button>
-	</div>
+   <script type="text/javascript">
+      alert("비밀번호가 맞지 않습니다");
+      history.back();
+   </script>
 </body>
 </html>

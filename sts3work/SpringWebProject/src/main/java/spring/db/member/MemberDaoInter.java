@@ -1,5 +1,6 @@
 package spring.db.member;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface MemberDaoInter {
@@ -8,4 +9,8 @@ public interface MemberDaoInter {
 	public void insertMember(MemberDto dto);	
 	public int getTotalCount();
 	public List<MemberDto> getAllDatas();
+	public MemberDto getMember(String num);
+	public int passCheck(String num,String pass);
+	public void updateMember(MemberDto dto);
+	public void deleteMember(String num);
 }
