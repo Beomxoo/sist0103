@@ -44,7 +44,7 @@
          <c:forEach var="dto" items="${list }" >
            <tr>
              <td align="center">${no}</td>
-             <c:set var="no" value="${no-1}"></c:set>
+             <c:set var="no" value="${no-1 }"/>
              <td><a href="content?num=${dto.num }&currentPage=${currentPage}" style="color: black; text-decoration: none;">${dto.subject }</a>
                 <c:if test="${dto.photo!='no' }">
                   <i class="bi bi-images photo"></i>
@@ -61,35 +61,42 @@
    </table>
 </div>
 
+<!-- 페이징 -->
 <div style="margin: 100px 100px; width: 800px; text-align: center;">
- 	<ul class="pagination justify-content-center">
- 		<!-- 이전 -->
- 		<c:if test="${startPage>1}">
- 			<li class="page-item ">
- 			<a class="page-link" href="list?currentPage=${startPage-1}" style="color: black;">이전</a>
- 			</li>
- 		</c:if>
- 		<!-- 페이지번호 -->
- 		<c:forEach var="pp" begin="${startPage}" end="${endPage }">
- 			<c:if test="${currentPage==pp}">
- 			<li class="page-item active">
+  <ul class="pagination justify-content-center">
+     <!--  이전-->
+     <c:if test="${startPage>1 }">
+        <li class="page-item ">
+	   <a class="page-link" href="list?currentPage=${startPage-1 }" style="color: black;">이전</a>
+	  </li>
+     </c:if>
+     
+     <!--페이지번호  -->
+     <c:forEach var="pp"  begin="${startPage }"  end="${endPage }">
+       <c:if test="${currentPage==pp }">
+       	  <li class="page-item active">
+    		<a class="page-link" href="list?currentPage=${pp }">${pp }</a>
+    	  </li>
+       </c:if>
+       
+       <c:if test="${currentPage!=pp }">
+          <li class="page-item">
     		<a class="page-link" href="list?currentPage=${pp }">${pp }</a>
     		</li>
- 			</c:if>
- 			<c:if test="${currentPage!=pp}">
-    		<li class="page-item">
-    		<a class="page-link" href="list?currentPage=${pp }">${pp }</a>
-    		</li>
- 			</c:if>
- 		</c:forEach>
- 		<!-- 다음 -->
- 		<c:if test="${endPage<totalPage}">
- 		   	<li class="page-item">
-    		<a  class="page-link" href="list?currentPage=${endPage+1}"
+       </c:if>
+     </c:forEach>
+     
+     
+     <!-- 다음 -->
+     <c:if test="${endPage<totalPage }">
+        <li class="page-item">
+    		<a  class="page-link" href="list?currentPage=${endPage+1 }"
     		style="color: black;">다음</a>
     	</li>
- 		</c:if>
- 	</ul>
+     </c:if>
+  </ul>
 </div>
+
+
 </body>
 </html>
