@@ -27,23 +27,23 @@ public class BoardWriteController {
 	@Autowired
 	BoardDaoInter dao;
 	
-	//»õ±Û ´ä±Û ¸ğµÎ ÇØ´ç
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½
 	
 	@GetMapping("/board/writeform")
 	public ModelAndView form(@RequestParam Map<String, String> map)
 	{
 		ModelAndView mview=new ModelAndView();
 		
-		//¾Æ·¡ 5°³ÀÇ °ªÀº ´ä±ÛÀÏ°æ¿ì¿¡¸¸ ³Ñ¾î¿È(»õ±ÛÀº ¾È³Ñ¾î¿È)
+		//ï¿½Æ·ï¿½ 5ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ì¿¡ï¿½ï¿½ ï¿½Ñ¾ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È³Ñ¾ï¿½ï¿½)
 		String currentPage=map.get("currentPage");
 		String num=map.get("num");
 		String regroup=map.get("regroup");
 		String restep=map.get("restep");
 		String relevel=map.get("relevel");
 		
-		System.out.println(currentPage+","+num);
+		System.out.println(currentPage+","+num);//null,null
 		
-		//ÀÔ·ÂÆû¿¡ hiddenÀ¸·Î ³Ö¾îÁà¾ßÇÔ..´ä±ÛÀÏ¶§¸¦ ´ëºñ
+		//ï¿½Ô·ï¿½ï¿½ï¿½ï¿½ï¿½ hiddenï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		
 		mview.addObject("currentPage", currentPage==null?"1":currentPage);
 		mview.addObject("num", num==null?"0":num);
@@ -51,7 +51,7 @@ public class BoardWriteController {
 		mview.addObject("restep", restep==null?"0":restep);
 		mview.addObject("relevel", relevel==null?"0":relevel);
 		
-		//0À¸·Î ³Ö¾î¾ß dao¿¡¼­ »õ±Û·Î ÀÎ½Ä
+		//0ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ daoï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û·ï¿½ ï¿½Î½ï¿½
 		
 		
 		mview.setViewName("board/writeform");
@@ -61,7 +61,7 @@ public class BoardWriteController {
 	@PostMapping("/board/insert")
 	public String insert(@ModelAttribute BoardDto dto,
 			@RequestParam ArrayList<MultipartFile> upload,
-			HttpSession session)
+			HttpSession session, @RequestParam int currentPage)
 	{
 		String path=session.getServletContext().getRealPath("/WEB-INF/photo");
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
@@ -77,7 +77,7 @@ public class BoardWriteController {
 				String fName=sdf.format(new Date())+f.getOriginalFilename();
 				photo+=fName+",";
 				
-				//¾÷·Îµå
+				//ï¿½ï¿½ï¿½Îµï¿½
 				try {
 					f.transferTo(new File(path+"\\"+fName));
 				} catch (IllegalStateException e) {
@@ -96,6 +96,9 @@ public class BoardWriteController {
 		dto.setPhoto(photo);
 		dao.insertBoard(dto);
 		
-		return "redirect:list";
+		//ì¸ì„œíŠ¸í›„ ëª©ë¡ìœ¼ë¡œ ê°€ì§€ë§ê³  ë‚´ìš©ë³´ê¸°ë¡œ ê°€ë ¤ë©´?
+		int num=dao.getMaxNum();
+		
+		return "redirect:content?num="+num+"&currentPage="+currentPage;
 	}
 }

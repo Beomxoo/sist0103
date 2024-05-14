@@ -38,7 +38,7 @@ public class BoardDao implements BoardDaoInter {
 	@Override
 	public void insertBoard(BoardDto dto) {
 		// TODO Auto-generated method stub
-		int num=dto.getNum(); //0:»õ±Û   1º¸´Ù Å«°ª: ´ä±Û
+		int num=dto.getNum(); //0:ï¿½ï¿½ï¿½ï¿½   1ï¿½ï¿½ï¿½ï¿½ Å«ï¿½ï¿½: ï¿½ï¿½ï¿½
 		int regroup=dto.getRegroup();
 		int restep=dto.getRestep();
 		int relevel=dto.getRelevel();
@@ -48,17 +48,17 @@ public class BoardDao implements BoardDaoInter {
 			regroup=getMaxNum()+1;
 			restep=0;
 			relevel=0;
-		}else { //´ä±ÛÀÏ¶§
+		}else { //ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½
 			
-			//°°Àº ±×·ìÁß Àü´Þ¹ÞÀº restepº¸´Ù Å«±ÛµéÀº +1
+			//ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Þ¹ï¿½ï¿½ï¿½ restepï¿½ï¿½ï¿½ï¿½ Å«ï¿½Ûµï¿½ï¿½ï¿½ +1
 			this.updateRestep(regroup, restep);
 			
-			//Àü´Þ¹ÞÀº step level +1
+			//ï¿½ï¿½ï¿½Þ¹ï¿½ï¿½ï¿½ step level +1
 			restep++;
 			relevel++;
 		}
 		
-		//¹Ù²ï°ªµé ´Ù½Ã dto´ã±â
+		//ï¿½Ù²ï°ªï¿½ï¿½ ï¿½Ù½ï¿½ dtoï¿½ï¿½ï¿½
 		dto.setRegroup(regroup);
 		dto.setRestep(restep);
 		dto.setRelevel(relevel);
@@ -87,6 +87,29 @@ public class BoardDao implements BoardDaoInter {
 	public BoardDto getOneData(int num) {
 		// TODO Auto-generated method stub
 		return session.selectOne("getDataOfBoard", num);
+	}
+
+	@Override
+	public int getCheckPass(int num, int pass) {
+		// TODO Auto-generated method stub
+		
+		HashMap<String, Integer> map=new HashMap<String, Integer>();
+		map.put("num", num);
+		map.put("pass", pass);
+		
+		return session.selectOne("CheckEqualPassOfBoard", map);
+	}
+
+	@Override
+	public void updateBoard(BoardDto dto) {
+		// TODO Auto-generated method stub
+		session.update("UpdateOfBoard", dto);
+	}
+
+	@Override
+	public void deleteBoard(int num) {
+		// TODO Auto-generated method stub
+		session.delete("DeleteOfBoard", num);
 	}
 
 }
