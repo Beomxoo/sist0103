@@ -36,9 +36,14 @@
 		<tr th:each="dto,iter:${list}">
                     <td>[[${iter.count}]]</td>
                     <td>
-                    <a>
+                    <a th:href="@{/detail(num=${dto.num})}">
                     <img th:src="@{/save/{filename}(filename=${dto.carphoto})}" alt="Car Photo" width="40">
                     [[${dto.carname}]]
+                    
+                    <!-- 댓글갯수추가 -->
+                    <span style="margin-left: 1px; color: red;" th:if="${dto.commentcount>0}">
+                    ([[${dto.commentcount}]])
+                    </span>
                    </a>
                     </td>
                     <td align="center">
