@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <!DOCTYPE html>
 <html>
@@ -49,7 +49,7 @@
        <a href="${root }/ipgo/list">상품목록</a>
      </li>
      <li>
-       <a href="${root }/member/list">회원목록</a>
+       <a href="${root }/member/myinfo">회원정보</a>
      </li>
      <li>
        <a href="${root }/member/form">회원가입</a>

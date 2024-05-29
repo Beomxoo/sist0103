@@ -12,19 +12,10 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <title>Insert title here</title>
 </head>
-	<c:set var="root" value="<%=request.getContextPath() %>"/>
 <body>
-	<i class="bi bi-envelope-arrow-down-fill"></i> &nbsp;sistcompany@hanmail.net <br>
-	<i class="bi bi-headset"></i>  &nbsp;02-123-5266<br>
-	<i class="bi bi-house-add-fill"></i>  &nbsp;서울시 강남구 역삼동 한독빌딩<br>
-	
-	<!-- 로그아웃상태는 기본이미지 로그인상태는 로그인한 이미지 나오게 -->
-	<c:if test="${sessionScope.loginok==null }">
-		<img alt="" src="${root }/image/1.png" width="130" height="130" style="border-radius: 100px;">
-	</c:if>
-	<c:if test="${sessionScope.loginok!=null }">
-		<img alt="" src="${root }/memberphoto/${sessionScope.loginphoto}" width="130" height="130" style="border-radius: 100px;">
-	</c:if>
-	
+<script type="text/javascript">
+	alert("로그인실패");
+	history.back();
+</script>
 </body>
 </html>

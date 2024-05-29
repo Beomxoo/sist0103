@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -87,7 +88,7 @@ public class IpgoController {
 			}
 			
 			//마지막 컴마 제거
-			uploadName.substring(0, uploadName.length()-1);
+			uploadName=uploadName.substring(0, uploadName.length()-1);
 		}
 		
 		dto.setPhotoname(uploadName);
@@ -97,4 +98,79 @@ public class IpgoController {
 		
 		return "redirect:list";
 	}
+	
+	@GetMapping("/ipgo/updateform")
+	public String updateform(@RequestParam String num,Model model)
+	{
+		IpgoDto dto=mapper.getData(num);
+		model.addAttribute("dto", dto);
+		
+		return "/ipgo/updateform";
+	}
+	
+	@PostMapping("/ipgo/update")
+	public String update(@ModelAttribute IpgoDto dto, @RequestParam ArrayList<MultipartFile> upload, HttpSession session)
+	{
+		String path=session.getServletContext().getRealPath("/ipgoimage");
+		
+		String uploadName="";
+		
+		if(upload.get(0).getOriginalFilename().equals(""))
+		{
+			uploadName=null;
+		} else {
+			for(MultipartFile f:upload)
+			{
+				SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
+				
+				String fName=sdf.format(new Date())+"_"+f.getOriginalFilename();
+				uploadName+=fName+",";
+				
+				try {
+					f.transferTo(new File(path+"\\"+ fName));
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			//마지막 컴마 제거
+			uploadName.substring(0, uploadName.length()-1);
+		}
+		
+		dto.setPhotoname(uploadName);
+		
+		mapper.updateIpgo(dto);
+		
+		
+		return "redirect:list";
+	}
+	
+	  @GetMapping("/ipgo/delete")
+	   public String delete(@RequestParam String num, HttpSession session) {
+	      // 데이터베이스에서 해당 번호의 데이터 가져오기
+	      IpgoDto dto = mapper.getData(num);
+
+	      // 삭제할 파일 경로 가져오기
+	      String path = session.getServletContext().getRealPath("/ipgoimage");
+	      String[] fileNames = dto.getPhotoname().split(",");
+
+	      // 실제 파일 삭제
+	      if (!"no".equals(dto.getPhotoname())) {
+	         for (String fileName : fileNames) {
+	            File file = new File(path + "\\" + fileName);
+	            if (file.exists()) {
+	               file.delete();
+	            }
+	         }
+	      }
+
+	      // 데이터베이스에서 데이터 삭제
+	      mapper.deleteIpgo(num);
+	      return "redirect:list";
+	   }
+	
 }
