@@ -23,7 +23,6 @@
    
    #btnlogin,#btnlogout{
      margin-left: 800px;
-     width: 100px;
    }
 </style>
 </head>
@@ -44,7 +43,7 @@
      <c:if test="${sessionScope.loginok!=null }">
          <b>${sessionScope.myid }님이 로그인중</b>
          <button type="button" class="btn btn-danger" style="width: 100px;"
-     onclick="location.href='${root}/login/logoutprocess'" id="btnlogout">Logout</button>
+     onclick="location.href='${root}/login/logoutprocess'">Logout</button>
      </c:if>
   </div>
   
@@ -55,19 +54,19 @@
   <div class="container mt-3">
   
   <c:if test="${sessionScope.loginok==null }">
-  	  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"
-  id="btnlogin">
-    Ajax Login
-  </button>
+	  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"
+	  id="btnlogin">
+	    Ajax Login
+	  </button>
   </c:if>
+  
   <c:if test="${sessionScope.loginok!=null }">
-  	<b>${sessionScope.loginname }님...</b>
-  	  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"
-  id="btnlogout" >
-    로그아웃
-  </button>
+   <%--  <b>${sessionScope.loginname }님...</b> --%>
+	  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal"
+	  id="btnlogout" >
+	    로그아웃
+	  </button>
   </c:if>
-
 </div>
 
 <!-- The Modal -->

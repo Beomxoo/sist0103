@@ -93,9 +93,9 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		
-		if(loginok==null || myid!=null)
+		/*if(loginok==null || myid!=null)
 			return "/member/gaipsuccess";
-		else
+		else*/
 		    return "redirect:list";
 		
 	}
@@ -131,6 +131,9 @@ public class MemberController {
 			
 			service.updatePhoto(num, fileName); //db업데이트
 			
+			//세션의 사진변경
+			session.setAttribute("loginphoto", fileName);
+			
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -140,5 +143,32 @@ public class MemberController {
 		}
 	}
 	
+	//수정폼에 출력할 데이타 반환
+	@GetMapping("/member/updateform")
+	@ResponseBody
+	public MemberDto getData(String num)
+	{
+		return service.getDataByNum(num);
+	}
 	
+	//수정
+	@PostMapping("/member/update")
+	@ResponseBody
+	public void update(MemberDto dto)
+	{
+		service.updateMember(dto);
+	}
+	
+	
+	//탈퇴
+	@GetMapping("/member/deleteme")
+	@ResponseBody
+	public void deleteme(String num,HttpSession session)
+	{
+		service.deleteMember(num);
+		
+		session.removeAttribute("loginok");
+		session.removeAttribute("myid");
+		
+	}
 }

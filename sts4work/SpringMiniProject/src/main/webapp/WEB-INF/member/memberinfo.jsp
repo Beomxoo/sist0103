@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Gaegu&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <title>Insert title here</title>
 <script type="text/javascript">
   $(function(){
@@ -44,6 +45,72 @@
 		  })
 		  
 	  });
+	  
+	  
+		//수정버튼클릭시 모달 다이얼로그에 데이터넣기
+      $(".btnupdate").click(function(){
+          updatenum = $(this).attr("num");
+          //alert(updatenum);
+          
+          $.ajax({
+              type: "get",
+              dataType: "json",
+              url: "updateform",
+              data: {"num": updatenum},
+              success: function(res){
+                  console.dir(res);
+                  $("#updatename").val(res.name);
+                  $("#updatehp").val(res.hp);
+                  $("#updateemail").val(res.email);
+                  $("#updateaddr").val(res.addr); 
+              }
+          });
+      });
+		
+		//수정하기
+      $("#btnupdateok").click(function(){
+          
+    	var name=$("#updatename").val();
+        var hp=$("#updatehp").val();
+        var email=$("#updateemail").val();
+        var addr=$("#updateaddr").val(); 
+
+          $.ajax({
+              type: "post",
+              dataType: "html",
+              url: "update",
+              data: {"num": updatenum, "name": name, "hp": hp, "email":email, "addr": addr},
+              success: function(res){
+            	  location.reload();
+              }
+          });
+      });
+	  
+	  //탈퇴
+	  $(".btndelete").click(function(){
+		  
+		  var num=$(this).attr("num");
+		  //alert(num);
+		  
+		  var a=confirm("정말 탈퇴하시겠습니까?");
+		  if(a){
+			  $.ajax({
+				  type:"get",
+				  dataType:"html",
+				  url: "deleteme",
+				  data: {"num": num},
+				  success:function(){
+					  alert("탈퇴하셨습니다");
+					  location.reload();
+				  }
+			  })
+		  }
+		  
+	  })
+	  
+		
+		
+	  
   })
 
 </script>
@@ -64,8 +131,8 @@
        </td>
        <td>회원명: ${dto.name }</td>
        <td rowspan="5" align="center" style="width: 200px;" valign="middle">
-           <button type="button" class="btn btn-outline-info" num="${dto.num }">수정</button>
-           <button type="button" class="btn btn-outline-danger" num="${dto.num }">삭제</button>
+           <button type="button" class="btn btn-outline-info btnupdate" num="${dto.num }" data-bs-toggle="modal" data-bs-target="#myUpdateModal">수정</button>
+           <button type="button" class="btn btn-outline-danger btndelete" num="${dto.num }">삭제</button>
        </td>
      </tr>
      
@@ -85,5 +152,51 @@
    </c:forEach>
 </table>
 </div>
+
+
+
+
+<!-- The Modal -->
+<div class="modal" id="myUpdateModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">회원정보수정</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="d-inline-flex">
+        	<label style="width: 80px;">Name: </label>&nbsp;&nbsp;
+        	<input type="text" class="form-control" id="updatename">
+         </div>
+          <div class="d-inline-flex">
+        	<label>hp: </label>&nbsp;&nbsp;
+        	<input type="text" class="form-control" id="updatehp">
+        	 </div>
+           <div class="d-inline-flex">
+        	<label>email: </label>&nbsp;&nbsp;
+        	<input type="text" class="form-control" id="updateemail">
+        	 </div>
+        	 <div class="d-inline-flex">
+        	<label>addr: </label>&nbsp;&nbsp;
+        	<input type="text" class="form-control" id="updateaddr">
+        	 </div>
+       
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-dismiss="modal" id="btnupdateok">수정</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
