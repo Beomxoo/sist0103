@@ -13,4 +13,10 @@ public class MapController {
 		return "/load/loadmap";
 	}
 	
+	@GetMapping("/load/kakaomap")
+	public String kakaomap()
+	{
+		return "/load/kakaomap";
+	}
+	
 }

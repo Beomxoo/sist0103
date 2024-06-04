@@ -9,6 +9,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Gaegu&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
@@ -38,8 +39,6 @@
 		    	return; 
 		    }
 		    
-		   // alert(num);
-		    
 		    //입력하면 ajax로 insert처리
 		    $.ajax({
 		    	type:"post",
@@ -56,8 +55,71 @@
 		    	}
 		    	
 		    })
+	   });
+	   
+	   
+	   
+	   
+	   //삭제
+	   $(document).on("click","i.adel",function(){
+		   
+		   var idx=$(this).attr("idx");
+		   //alert(idx);
+		   
+		   var a=confirm("해당 댓글을 삭제할까요?");
+		   if(a==true){
+			   
+			   $.ajax({
+				   type:"get",
+				   dataType:"html",
+				   url:"adelete",
+				   data:{"idx":idx},
+				   success:function(){
+					   alert("삭제완료!!!");
+					   list();
+				   }
+			   })
+		   }
+	   });
+	   
+	   
+	   
+	   //댓글 수정버튼 누르면 모달다이얼로그
+	   $(document).on("click","i.amod",function(){
+		   idx=$(this).attr("idx");
+		   //alert(idx);
+		   $.ajax({
+			   type:"get",
+			   dataType:"json",
+			   url:"adata",
+			   data:{"idx":idx},
+			   success:function(data){
+				   
+				   $("#ucontent").val(data.content);
+			   }
+		   });
+		   
+		   $("#myUpdateContentModal").modal("show");
 	   })
 	   
+	   //수정
+	   $(document).on("click","#btnupdateok",function(){
+		   
+		   var content=$("#ucontent").val();
+		   //alert(content+","+idx);
+		   
+		   $.ajax({
+			   type:"post",
+			   dataType:"html",
+			   url:"aupdate",
+			   data:{"idx":idx,"content":content},
+			   success:function(data){
+				   alert("수정성공!!!");
+				   list();
+			   }
+		   })
+		   
+	   });
 	   
    })
    
@@ -85,9 +147,9 @@
 				   s+="<span class='day'>"+dto.writeday+"</span>";
 				   
 				   if(loginok=='yes' && myid==dto.myid){
-					   s+="<i class='bi bi-pencil-square'></i>";
+					   s+="<i class='bi bi-pencil-square amod' idx='"+dto.idx+"'></i>";
 					   s+="&nbsp";
-					   s+='<i class="bi bi-trash-fill"></i>';
+					   s+="<i class='bi bi-trash-fill adel' idx='"+dto.idx+"' ></i>";
 				   }
 				   
 				   s+="<br>";
@@ -193,6 +255,34 @@
       </tr>
    </table>
 </div>
+
+<!-- The 댓글 수정 Modal -->
+<div class="modal" id="myUpdateContentModal">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">댓글수정</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <input type="text" id="ucontent" class="form-control">
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="btnupdateok">수정</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
 
 </body>
 </html>
